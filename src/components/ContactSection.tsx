@@ -81,8 +81,9 @@ const ContactSection = () => {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className="bg-secondary border-0 min-h-[100px]"
             />
-            <Button type="submit" size="lg" className="w-full gradient-primary text-primary-foreground py-6 shadow-glow hover:opacity-90 transition-opacity gap-2">
-              <Send className="w-5 h-5" /> Send Message
+            <Button type="submit" size="lg" disabled={isSubmitting} className="w-full gradient-primary text-primary-foreground py-6 shadow-glow hover:opacity-90 transition-opacity gap-2">
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </motion.form>
 
