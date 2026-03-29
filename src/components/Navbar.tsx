@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logo from "@/assets/trumaths-logo.png";
 
 const navItems = ["Home", "Courses", "About", "Reviews", "Contact"];
 
