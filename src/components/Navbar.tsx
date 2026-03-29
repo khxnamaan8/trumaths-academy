@@ -18,13 +18,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2">
-          <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center">
-            <span className="text-primary-foreground font-extrabold text-lg">T</span>
-          </div>
-          <span className="font-extrabold text-xl text-foreground">
-            Tru<span className="text-gradient">Maths</span>
-          </span>
+        <a href="#" className="flex items-center">
+          <img src={logo} alt="TruMaths Academy" className="h-12 md:h-14 w-auto" />
         </a>
 
         {/* Desktop Nav */}
