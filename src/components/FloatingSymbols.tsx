@@ -1,13 +1,13 @@
-const symbols = ["π", "∑", "√", "∫", "x²", "Δ", "∞", "θ", "±", "≈"];
+const symbols = ["π", "∑", "√", "∫", "x²", "Δ", "∞", "θ", "±", "≈", "y=mx+c", "a²+b²", "∂", "λ", "∮"];
 
 const FloatingSymbols = () => {
   const items = symbols.map((symbol, i) => ({
     symbol,
-    left: `${(i * 10) + Math.random() * 5}%`,
+    left: `${(i * 6.5) + Math.random() * 3}%`,
     top: `${Math.random() * 100}%`,
-    size: 20 + Math.random() * 40,
-    duration: 10 + Math.random() * 10,
-    delay: Math.random() * 8,
+    size: 28 + Math.random() * 50,
+    duration: 8 + Math.random() * 12,
+    delay: Math.random() * 6,
   }));
 
   return (
