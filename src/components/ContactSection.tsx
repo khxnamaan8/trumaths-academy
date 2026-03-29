@@ -1,22 +1,39 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { MapPin, Phone, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Clock, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const { toast } = useToast();
   const [formData, setFormData] = useState({ name: "", phone: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const msg = `Hi, I'm ${formData.name}. ${formData.message || "I'd like to book a demo."}`;
-    window.open(`https://wa.me/919873419187?text=${encodeURIComponent(msg)}`, "_blank");
-    toast({ title: "Redirecting to WhatsApp!", description: "We'll connect with you shortly." });
+    setIsSubmitting(true);
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        message: formData.message.trim() || null,
+      });
+      if (error) throw error;
+      toast({ title: "Message sent!", description: "We'll get back to you shortly." });
+      setFormData({ name: "", phone: "", message: "" });
+      // Also open WhatsApp
+      const msg = `Hi, I'm ${formData.name}. ${formData.message || "I'd like to book a demo."}`;
+      window.open(`https://wa.me/919873419187?text=${encodeURIComponent(msg)}`, "_blank");
+    } catch {
+      toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -64,8 +81,9 @@ const ContactSection = () => {
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               className="bg-secondary border-0 min-h-[100px]"
             />
-            <Button type="submit" size="lg" className="w-full gradient-primary text-primary-foreground py-6 shadow-glow hover:opacity-90 transition-opacity gap-2">
-              <Send className="w-5 h-5" /> Send Message
+            <Button type="submit" size="lg" disabled={isSubmitting} className="w-full gradient-primary text-primary-foreground py-6 shadow-glow hover:opacity-90 transition-opacity gap-2">
+              {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin" /> : <Send className="w-5 h-5" />}
+              {isSubmitting ? "Sending..." : "Send Message"}
             </Button>
           </motion.form>
 
