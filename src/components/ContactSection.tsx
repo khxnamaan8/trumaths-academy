@@ -1,10 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { MapPin, Phone, Clock, Send } from "lucide-react";
+import { MapPin, Phone, Clock, Send, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const ContactSection = () => {
   const ref = useRef(null);
