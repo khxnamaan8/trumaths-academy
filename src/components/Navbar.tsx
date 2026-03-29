@@ -19,7 +19,7 @@ const Navbar = () => {
       <div className="container mx-auto px-4 md:px-8 flex items-center justify-between h-16 md:h-20">
         {/* Logo */}
         <a href="#" className="flex items-center">
-          <img src={logo} alt="TruMaths Academy" className="h-12 md:h-14 w-auto" />
+          <img src={logo} alt="TruMaths Academy" className="h-14 md:h-16 w-auto" />
         </a>
 
         {/* Desktop Nav */}
