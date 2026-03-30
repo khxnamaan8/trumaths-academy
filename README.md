@@ -1,3 +1,3 @@
-# Welcome to your Trumaths Acadeemy
+# Welcome to your Trumaths Academy
 
 TODO: Document your project here
